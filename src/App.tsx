@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import "./App.css";
+import SearchAPIData from "../src/component/atoms/SearchAPIData";
+import axios from "axios";
 
 const App: React.FC = () => {
+  const data = {hits: [], events: []}
+
+  console.log(data)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <SearchAPIData urlName={"https://hn.algolia.com/api/v1/search?query="} initalQuery={'python'}  apiName={'Hacker News'} eventName={data[0]} selectFormat={''}/>
+      <SearchAPIData urlName={"https://connpass.com/api/v1/event/?keyword="} initalQuery={'redux'}  apiName={'Connpass'} eventName={data[1]} selectFormat={''}/>
+      <SearchAPIData urlName={"http://api.atnd.org/events/?keyword_or="} initalQuery={'redux'}  apiName={'ATND'} eventName={data[1]} selectFormat={'&format=json'}/>
+    </React.Fragment>
   );
-}
+};
 
 export default App;
